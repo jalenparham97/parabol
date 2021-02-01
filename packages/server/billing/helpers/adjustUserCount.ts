@@ -51,14 +51,15 @@ const changePause = (inactive: boolean) => async (_orgIds: string[], userId: str
     userId,
     event: inactive ? 'Account Paused' : 'Account Unpaused'
   })
-  await updateUser([userId], {inactive})
+  const inactiveUpdate = {inactive}
   return Promise.all([
-    db.write('User', userId, {inactive}),
+    updateUser([userId], inactiveUpdate),
+    db.write('User', userId, inactiveUpdate),
     r
       .table('OrganizationUser')
       .getAll(userId, {index: 'userId'})
       .filter({removedAt: null})
-      .update({inactive})
+      .update(inactiveUpdate)
       .run()
   ])
 }
