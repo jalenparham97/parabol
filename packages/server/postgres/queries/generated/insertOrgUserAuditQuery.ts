@@ -1,7 +1,7 @@
 /** Types generated for queries found in "packages/server/postgres/queries/src/insertOrgUserAuditQuery.sql" */
 import { PreparedQuery } from '@pgtyped/query';
 
-export type OrganizationUserAuditEventTypeEnum = 'added' | 'activated' | 'inactivated' | 'removed';
+export type OrganizationUserAuditEventTypeEnum = 'removed' | 'inactivated' | 'activated' | 'added';
 
 /** 'InsertOrgUserAuditQuery' parameters type */
 export interface IInsertOrgUserAuditQueryParams {

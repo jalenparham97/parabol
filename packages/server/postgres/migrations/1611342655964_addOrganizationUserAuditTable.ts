@@ -24,7 +24,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
   pgm.sql(`
-    DROP TYPE "OrganizationUserAuditEventTypeEnum";
     DROP TABLE "OrganizationUserAudit";
+    DROP TYPE "OrganizationUserAuditEventTypeEnum";
   `)
 }

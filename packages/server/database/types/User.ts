@@ -36,14 +36,14 @@ export default class User {
   picture: string
   inactive: boolean
   identities: AuthIdentity[]
-  isRemoved?: true
+  isRemoved: boolean
   createdAt: Date
-  segmentId?: string
+  segmentId?: string | null
   tier: TierEnum
   tms: string[]
-  reasonRemoved?: string
-  rol?: AuthTokenRole.SUPER_USER
-  payLaterClickCount?: number
+  reasonRemoved?: string | null
+  rol?: AuthTokenRole.SUPER_USER | null
+  payLaterClickCount?: number | null
   constructor(input: Input) {
     const {
       tms,
@@ -59,7 +59,7 @@ export default class User {
       inactive,
       preferredName,
       segmentId,
-      tier
+      tier,
     } = input
     const avatarName =
       preferredName
@@ -81,7 +81,9 @@ export default class User {
     this.lastSeenAt = lastSeenAt ?? null
     this.lastSeenAtURLs = lastSeenAtURLs ?? null
     this.preferredName = preferredName
-    this.segmentId = segmentId ?? undefined
+    this.segmentId = segmentId ?? null
     this.tier = tier ?? TierEnum.personal
+    this.isRemoved = false
+    this.rol = null
   }
 }

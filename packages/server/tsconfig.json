@@ -22,7 +22,8 @@
     ],
   },
   "include": [
-    "*"
+    "*",
+    "postgres/zapatos/**/*.d.ts"
   ],
   "exclude": [
     "**/node_modules"
