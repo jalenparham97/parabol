@@ -1,4 +1,5 @@
 import {GraphQLID, GraphQLNonNull, GraphQLString} from 'graphql'
+import updateUser from '../../postgres/helpers/updateUser'
 import getRethink from '../../database/rethinkDriver'
 import User from '../../database/types/User'
 import db from '../../db'
@@ -72,6 +73,7 @@ export default {
         email: 'DELETED',
         reasonRemoved: validReason
       })
+      updateUser([userIdToDelete], {isRemoved: true, reasonRemoved: validReason})
     }, 30000)
     return {}
   }
