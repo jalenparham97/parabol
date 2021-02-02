@@ -75,7 +75,7 @@ const emailPasswordReset = {
         .run()
 
       const updates = {identities}
-      await Promise.all([, updateUser([userId], updates), db.write('User', userId, updates)])
+      await Promise.all([updateUser([userId], updates), db.write('User', userId, updates)])
 
       const {subject, body, html} = resetPasswordEmailCreator({resetPasswordToken})
       const success = await getMailManager().sendEmail({

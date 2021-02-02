@@ -12,6 +12,7 @@ import {GQLContext} from '../graphql'
 import rateLimit from '../rateLimit'
 import LoginWithGooglePayload from '../types/LoginWithGooglePayload'
 import bootstrapNewUser from './helpers/bootstrapNewUser'
+import updateUser from '../../postgres/helpers/updateUser'
 
 const loginWithGoogle = {
   type: new GraphQLNonNull(LoginWithGooglePayload),
@@ -48,7 +49,6 @@ const loginWithGoogle = {
         .nth(0)
         .default(null)
         .run()
-
       if (existingUser) {
         const {id: viewerId, identities, rol} = existingUser
         let googleIdentity = identities.find(
@@ -75,7 +75,8 @@ const loginWithGoogle = {
             id: sub
           })
           identities.push(googleIdentity) // mutative
-          await db.write('User', viewerId, {identities})
+          const update = {identities}
+          await Promise.all([db.write('User', viewerId, update), updateUser([viewerId], update)])
         }
         // MUTATIVE
         context.authToken = new AuthToken({sub: viewerId, rol, tms: existingUser.tms})
