@@ -9,6 +9,8 @@ import segmentIo from '../../utils/segmentIo'
 import standardError from '../../utils/standardError'
 import {GQLContext} from '../graphql'
 import PayLaterPayload from '../types/PayLaterPayload'
+import z from '../../postgres/getZapatos'
+import updateUser from '../../postgres/helpers/updateUser'
 
 export default {
   type: new GraphQLNonNull(PayLaterPayload),
@@ -70,7 +72,10 @@ export default {
         .default(0)
         .add(1)
     })
-    await db.write('User', viewerId, reqlUpdater)
+    await Promise.all([
+      db.write('User', viewerId, reqlUpdater),
+      updateUser([viewerId], {payLaterClickCount: z.sql`${z.self} + 1`})
+    ])
 
     segmentIo.track({
       userId: viewerId,

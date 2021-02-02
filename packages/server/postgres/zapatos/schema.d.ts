@@ -128,7 +128,7 @@ declare module 'zapatos/schema' {
       isRemoved: boolean;
       reasonRemoved: string | null;
       rol: c.PgAuthTokenRoleDomain | null;
-      payLaterClickCount: number | null;
+      payLaterClickCount: number;
     }
     export interface Whereable {
       id?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
@@ -172,7 +172,7 @@ declare module 'zapatos/schema' {
       isRemoved?: boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment;
       reasonRemoved?: string | db.Parameter<string> | null | db.DefaultType | db.SQLFragment;
       rol?: c.PgAuthTokenRoleDomain | db.Parameter<c.PgAuthTokenRoleDomain> | null | db.DefaultType | db.SQLFragment;
-      payLaterClickCount?: number | db.Parameter<number> | null | db.DefaultType | db.SQLFragment;
+      payLaterClickCount?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment;
     }
     export interface Updatable {
       id?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
@@ -194,7 +194,7 @@ declare module 'zapatos/schema' {
       isRemoved?: boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment>;
       reasonRemoved?: string | db.Parameter<string> | null | db.DefaultType | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | null | db.DefaultType | db.SQLFragment>;
       rol?: c.PgAuthTokenRoleDomain | db.Parameter<c.PgAuthTokenRoleDomain> | null | db.DefaultType | db.SQLFragment | db.SQLFragment<any, c.PgAuthTokenRoleDomain | db.Parameter<c.PgAuthTokenRoleDomain> | null | db.DefaultType | db.SQLFragment>;
-      payLaterClickCount?: number | db.Parameter<number> | null | db.DefaultType | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | null | db.DefaultType | db.SQLFragment>;
+      payLaterClickCount?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | db.DefaultType | db.SQLFragment>;
     }
     export interface JSONSelectable extends JSONSelectableFromSelectable<Selectable> { }
     export type UniqueIndex = 'User_pkey' | 'User_email_key';

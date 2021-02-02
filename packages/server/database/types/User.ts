@@ -43,7 +43,7 @@ export default class User {
   tms: string[]
   reasonRemoved?: string | null
   rol?: AuthTokenRole.SUPER_USER | null
-  payLaterClickCount?: number | null
+  payLaterClickCount?: number
   constructor(input: Input) {
     const {
       tms,
@@ -84,6 +84,5 @@ export default class User {
     this.segmentId = segmentId ?? null
     this.tier = tier ?? TierEnum.personal
     this.isRemoved = false
-    this.rol = null
   }
 }

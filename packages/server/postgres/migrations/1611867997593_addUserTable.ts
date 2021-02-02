@@ -3,13 +3,6 @@ import { MigrationBuilder, ColumnDefinitions } from 'node-pg-migrate';
 
 export const shorthands: ColumnDefinitions | undefined = undefined;
 
-/*
- todos:
- - try defining email as domain
- - try defining identities as domain,
-   and then supply a custom type for it
- */
-
 export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.sql(`
     CREATE TYPE "TierEnum" AS ENUM (
@@ -52,7 +45,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       "isRemoved" BOOLEAN NOT NULL DEFAULT FALSE,
       "reasonRemoved" VARCHAR(2000),
       rol "AuthTokenRoleDomain",
-      "payLaterClickCount" SMALLINT
+      "payLaterClickCount" SMALLINT NOT NULL DEFAULT 0
     );
   `)
 }
