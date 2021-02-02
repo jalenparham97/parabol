@@ -1,4 +1,5 @@
 import {GraphQLNonNull} from 'graphql'
+import updateUser from '../../postgres/helpers/updateUser'
 import db from '../../db'
 import {getUserId} from '../../utils/authorization'
 import DismissNewFeaturePayload from '../types/DismissNewFeaturePayload'
@@ -10,7 +11,8 @@ export default {
   resolve: async (_source, _args, {authToken}) => {
     // AUTH
     const viewerId = getUserId(authToken)
-    await db.write('User', viewerId, {newFeatureId: null})
+    const update = {newFeatureId: null}
+    await Promise.all([updateUser([viewerId], update), db.write('User', viewerId, update)])
     return {}
   }
 }
